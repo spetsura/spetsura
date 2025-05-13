@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spetsura Terminal</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/style.v5.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <video autoplay muted loop id="bg-video">
+    <source src="/terminal.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="intro">
+    <div class="terminal">
+      <p class="terminal-line">
+        <span class="prompt">Spetsura@terminal:~$</span>
+        <span id="typed-js"></span>
+        <span id="done" style="display: none;">✓ Done</span>
+      </p>
+    </div>
+  </div>
+
+  <main id="site-content" style="display: none;">
+    <h1>Welcome to Spetsura</h1>
+    <p>This is your personal secured VPS.</p>
+  </main>
+
+  <script>
+    const text = "Launching site...";
+    const typed = document.getElementById("typed-js");
+    const done = document.getElementById("done");
+    const intro = document.getElementById("intro");
+    const content = document.getElementById("site-content");
+
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        typed.textContent += text[i];
+        i++;
+        setTimeout(type, 80);
+      } else {
+        done.style.display = "inline-block";
+        setTimeout(() => {
+          intro.style.transition = "opacity 0.6s ease-out";
+          intro.style.opacity = 0;
+          setTimeout(() => {
+            intro.style.display = "none";
+            content.style.display = "block";
+          }, 600);
+        }, 1000);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+
+</body>
+</html>
