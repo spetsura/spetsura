@@ -36,25 +36,31 @@
     const intro = document.getElementById("intro");
     const content = document.getElementById("site-content");
 
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        typed.textContent += text[i];
-        i++;
-        setTimeout(type, 80);
-      } else {
-        done.style.display = "inline-block";
-        setTimeout(() => {
-          intro.style.transition = "opacity 0.6s ease-out";
-          intro.style.opacity = 0;
-          setTimeout(() => {
-            intro.style.display = "none";
-            content.style.display = "block";
-          }, 600);
-        }, 1000);
-      }
-    }
+function type() {
+  if (i < text.length) {
+    typed.textContent += text[i];
+    i++;
+    setTimeout(type, 80);
+  } else {
+    done.style.display = "inline-block";
+    setTimeout(() => {
+      intro.style.transition = "opacity 0.6s ease-out";
+      intro.style.opacity = 0;
+      setTimeout(() => {
+        intro.style.display = "none";
+        content.style.display = "block";
 
+        const terminal = document.querySelector('.terminal-output');
+        if (terminal) terminal.classList.remove('hidden');
+
+        const dock = document.querySelector('.mac-dock');
+        if (dock) dock.classList.remove('hidden');
+
+      }, 600);
+    }, 1000);
+  }
+}
+      
     document.addEventListener("DOMContentLoaded", type);
   </script>
 
